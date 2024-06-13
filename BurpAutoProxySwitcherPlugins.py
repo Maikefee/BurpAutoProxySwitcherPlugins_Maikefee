@@ -51,6 +51,8 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.enabled = False
         self.proxies = []
         self._callbacks.addSuiteTab(self)
+        
+        print("author:https://github.com/Maikefee/")
         print("Proxy Switcher loaded.")
 
     def getTabCaption(self):
