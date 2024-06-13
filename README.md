@@ -9,4 +9,6 @@
 
 插件环境自行下载:jython-standalone-2.7.1.jar
 
+注：仅用于分享学习交流，切勿用于非法用途，与本人无关。
+
 ![image](https://github.com/Maikefee/BurpAutoProxySwitcherPlugins/blob/main/WX20240613-093041%402x.png)
