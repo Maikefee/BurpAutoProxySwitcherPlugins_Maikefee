@@ -9,5 +9,5 @@
 插件环境自行下载:jython-standalone-2.7.1.jar
 
 ![image](
-[https://github.com/Maikefee/BurpAutoProxySwitcherPlugins/blob/main/WX20240612-180518%402x.png](https://github.com/Maikefee/BurpAutoProxySwitcherPlugins/blob/main/WX20240613-093041%402x.png)
+[https://github.com/Maikefee/BurpAutoProxySwitcherPlugins/blob/main/WX20240612-180518%402x.png]
 )
