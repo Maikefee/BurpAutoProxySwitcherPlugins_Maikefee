@@ -7,3 +7,6 @@
 
 说明：首先爬取大量的socks代理或者http代理，保存在某个txt，然后bp导入插件并启动，然后导入代理的txt，可设置一个请求换一次socks代理ip，这样就绕过了封ip的情况。
 插件环境自行下载:jython-standalone-2.7.1.jar
+
+https://github.com/Maikefee/BurpAutoProxySwitcherPlugins/blob/main/WX20240612-180518%402x.png
+
