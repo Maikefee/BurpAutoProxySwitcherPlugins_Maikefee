@@ -1,5 +1,6 @@
 # BurpAutoProxySwitcherPlugins
 # 红队必备
+环境：1.本地安装 PySocks 库：pip install PySocks 2.安装jpython环境
 
 功能：自动切换代理，绕过封ip的情景。
 
