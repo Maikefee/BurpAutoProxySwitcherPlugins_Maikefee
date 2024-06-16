@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from burp import IBurpExtender, IHttpListener, ITab
 from javax.swing import JPanel, JLabel, JTextField, JButton, JCheckBox, JTextArea, JScrollPane, JRadioButton, ButtonGroup
 from java.awt import BorderLayout
@@ -25,10 +27,8 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.request_count_field = JTextField("1", 5)
         
         # Proxy type selection
-        self.radio_socks5 = JRadioButton("SOCKS5", True)
-        self.radio_http = JRadioButton("HTTP")
+        self.radio_http = JRadioButton("HTTP", True)
         self.radio_group = ButtonGroup()
-        self.radio_group.add(self.radio_socks5)
         self.radio_group.add(self.radio_http)
         
         self.top_panel.add(self.toggle_plugin)
@@ -38,7 +38,6 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.top_panel.add(self.clear_button)
         self.top_panel.add(self.request_count_label)
         self.top_panel.add(self.request_count_field)
-        self.top_panel.add(self.radio_socks5)
         self.top_panel.add(self.radio_http)
         
         self.response_area = JTextArea(10, 30)
@@ -83,14 +82,18 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
     def processHttpMessage(self, toolFlag, messageIsRequest, messageInfo):
         if not self.enabled or not messageIsRequest:
             return
-        if toolFlag in (self._callbacks.TOOL_INTRUDER, self._callbacks.TOOL_REPEATER) and self.proxies:
-            proxy = random.choice(self.proxies)
-            host, port = proxy.split(":")
-            if self.radio_socks5.isSelected():
-                protocol = "socks"
-            else:
+        try:
+            if toolFlag in (self._callbacks.TOOL_INTRUDER, self._callbacks.TOOL_REPEATER) and self.proxies:
+                proxy = random.choice(self.proxies)
+                host, port = proxy.split(":")
                 protocol = "http"
-            messageInfo.setHttpService(self._helpers.buildHttpService(host, int(port), protocol))
-            self.response_area.append("Request from {} routed through: {}:{} using {} protocol.\n".format(
-                self._callbacks.getToolName(toolFlag), host, port, protocol.upper()))
-
+                service = self._helpers.buildHttpService(host, int(port), protocol)
+                if service:
+                    messageInfo.setHttpService(service)
+                    self.response_area.append("Request from {} routed through: {}:{} using {} protocol.\n".format(
+                        self._callbacks.getToolName(toolFlag), host, port, protocol.upper()))
+                else:
+                    self.response_area.append("Failed to set HttpService for {}:{} using {} protocol.\n".format(
+                        host, port, protocol.upper()))
+        except Exception as e:
+            self.response_area.append("Error processing HTTP message: {}\n".format(str(e)))
