@@ -18,7 +18,7 @@
 
 
 
-英文：
+English：
 
 Environment: 1. Local installation of PySocks library: pip install PySocks 2. Install jPython environment
 Function: Automatically switch proxies to bypass IP blocking scenarios.
