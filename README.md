@@ -20,7 +20,9 @@
 
 English：
 
-Environment: 1. Local installation of PySocks library: pip install PySocks 2. Install jPython environment
+Environment: 
+1. Local installation of PySocks library: pip install PySocks 
+2. Install jPython environment
 Function: Automatically switch proxies to bypass IP blocking scenarios.
 Scenario: Crawling socks5 agents for penetration testing in BP while blasting batch IP blocking.
 Explanation: First, crawl a large number of Socks or HTTP proxies and save them in a certain txt. Then, import the BP plugin and start it, and then import the proxy's txt. You can set a request to change the Socks proxy IP once, which bypasses the situation of IP blocking. For example, setting one switch will trigger the plugin switch function for each repeater and integrator request
