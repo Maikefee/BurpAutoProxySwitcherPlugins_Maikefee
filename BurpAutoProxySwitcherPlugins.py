@@ -28,8 +28,10 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         
         # Proxy type selection
         self.radio_http = JRadioButton("HTTP", True)
+        self.radio_socks5 = JRadioButton("SOCKS5")
         self.radio_group = ButtonGroup()
         self.radio_group.add(self.radio_http)
+        self.radio_group.add(self.radio_socks5)
         
         self.top_panel.add(self.toggle_plugin)
         self.top_panel.add(self.path_label)
@@ -39,6 +41,7 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
         self.top_panel.add(self.request_count_label)
         self.top_panel.add(self.request_count_field)
         self.top_panel.add(self.radio_http)
+        self.top_panel.add(self.radio_socks5)
         
         self.response_area = JTextArea(10, 30)
         self.response_area.setEditable(False)
@@ -86,7 +89,10 @@ class BurpExtender(IBurpExtender, IHttpListener, ITab):
             if toolFlag in (self._callbacks.TOOL_INTRUDER, self._callbacks.TOOL_REPEATER) and self.proxies:
                 proxy = random.choice(self.proxies)
                 host, port = proxy.split(":")
-                protocol = "http"
+                if self.radio_http.isSelected():
+                    protocol = "http"
+                elif self.radio_socks5.isSelected():
+                    protocol = "socks5"
                 service = self._helpers.buildHttpService(host, int(port), protocol)
                 if service:
                     messageInfo.setHttpService(service)
