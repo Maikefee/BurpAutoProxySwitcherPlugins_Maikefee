@@ -1,4 +1,4 @@
-# MBurpAutoProxySwitcherPlugins
+# BurpAutoProxySwitcherPlugins
 # 红队必备
 
 中文：
